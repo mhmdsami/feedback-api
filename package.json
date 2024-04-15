@@ -1,9 +1,10 @@
 {
-  "name": "devops-ci",
+  "name": "feedback-api",
   "version": "1.0.50",
   "scripts": {
     "dev": "bun run --watch src/index.ts",
     "db:generate": "drizzle-kit generate:pg",
+    "db:migrate": "bun run src/utils/migrate.ts",
     "format": "prettier --write ."
   },
   "dependencies": {
