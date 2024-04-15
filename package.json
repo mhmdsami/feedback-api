@@ -3,13 +3,18 @@
   "version": "1.0.50",
   "scripts": {
     "dev": "bun run --watch src/index.ts",
-    "format": "prettier --write **/*.ts"
+    "db:generate": "drizzle-kit generate:pg",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "elysia": "latest"
+    "drizzle-orm": "^0.30.8",
+    "elysia": "latest",
+    "postgres": "^3.4.4",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "bun-types": "latest",
+    "drizzle-kit": "^0.20.14",
     "prettier": "3.2.5"
   },
   "module": "src/index.js"
