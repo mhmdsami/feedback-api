@@ -28,7 +28,7 @@ export const app = new Elysia()
         return Response.json(
           {
             message: "Validation error",
-            errors: error.validator.Errors(error.value).First().schema.error
+            errors: error.validator.Errors(error.value).First().schema.error,
           },
           { status: 400 },
         );

@@ -1,11 +1,9 @@
-// test/index.test.ts
 import { app } from "@/index";
 import { describe, expect, it } from "bun:test";
 
 describe("API", () => {
   it("return a response", async () => {
-    const response = await app
-      .handle(new Request("http://localhost/"))
+    const response = await app.handle(new Request("http://localhost/"));
     expect(response.status).toBe(200);
 
     const body = await response.json();
@@ -15,8 +13,9 @@ describe("API", () => {
   });
 
   it("health is ok", async () => {
-    const response = await app
-      .handle(new Request("http://localhost/healthcheck"))
+    const response = await app.handle(
+      new Request("http://localhost/healthcheck"),
+    );
     expect(response.status).toBe(200);
 
     const body = await response.json();
@@ -27,8 +26,7 @@ describe("API", () => {
   });
 
   it("return 404", async () => {
-    const response = await app
-      .handle(new Request("http://localhost/unknown"))
+    const response = await app.handle(new Request("http://localhost/unknown"));
     expect(response.status).toBe(404);
 
     const body = await response.json();

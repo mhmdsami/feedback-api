@@ -9,14 +9,16 @@ export const feedbackController = new Elysia({
 }).post(
   "/",
   async ({ body, query: { slug } }) => {
-    const eventExists = (await db.select().from(event).where(eq(event.slug, slug))).length;
+    const eventExists = (
+      await db.select().from(event).where(eq(event.slug, slug))
+    ).length;
 
     if (!eventExists) {
       return Response.json(
         {
           message: "Event not found",
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -31,7 +33,7 @@ export const feedbackController = new Elysia({
           message: "Feedback added successfully!",
           feedback: res,
         },
-        { status: 201 }
+        { status: 201 },
       );
     }
 
@@ -39,7 +41,7 @@ export const feedbackController = new Elysia({
       {
         message: "Failed to add feedback",
       },
-      { status: 500 }
+      { status: 500 },
     );
   },
   {
@@ -62,5 +64,5 @@ export const feedbackController = new Elysia({
         error: "slug must be between 1 and 100 characters",
       }),
     }),
-  }
+  },
 );
