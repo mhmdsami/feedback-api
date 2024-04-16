@@ -14,20 +14,22 @@ export const adminController = new Elysia({
         {
           message: "You are not authorized to access this resource.",
         },
-        { status: 401 }
+        { status: 401 },
       );
     }
   })
   .post(
     "/create-event",
     async ({ body }) => {
-      const exists = (await db.select().from(event).where(eq(event.slug, body.slug))).length;
+      const exists = (
+        await db.select().from(event).where(eq(event.slug, body.slug))
+      ).length;
       if (exists) {
         return Response.json(
           {
             message: "Event with this slug already exists",
           },
-          { status: 409 }
+          { status: 409 },
         );
       }
 
@@ -39,7 +41,7 @@ export const adminController = new Elysia({
             message: "Event created successfully!",
             data: res,
           },
-          { status: 201 }
+          { status: 201 },
         );
       }
 
@@ -47,7 +49,7 @@ export const adminController = new Elysia({
         {
           message: "Failed to create event",
         },
-        { status: 500 }
+        { status: 500 },
       );
     },
     {
@@ -68,35 +70,39 @@ export const adminController = new Elysia({
           error: "slug must be between 1 and 100 characters",
         }),
       }),
-    }
+    },
   )
-  .delete("/delete-event", async ({ query: { slug } }) => {
-    const res = await db.delete(event).where(eq(event.slug, slug));
+  .delete(
+    "/delete-event",
+    async ({ query: { slug } }) => {
+      const res = await db.delete(event).where(eq(event.slug, slug));
 
-    if (res) {
+      if (res) {
+        return Response.json(
+          {
+            message: "Event deleted successfully!",
+          },
+          { status: 200 },
+        );
+      }
+
       return Response.json(
         {
-          message: "Event deleted successfully!",
+          message: "Failed to delete event",
         },
-        { status: 200 }
+        { status: 500 },
       );
-    }
-
-    return Response.json(
-      {
-        message: "Failed to delete event",
-      },
-      { status: 500 }
-    );
-  }, {
-    query: t.Object({
-      slug: t.String({
-        minLength: 1,
-        maxLength: 100,
-        error: "slug must be between 1 and 100 characters",
+    },
+    {
+      query: t.Object({
+        slug: t.String({
+          minLength: 1,
+          maxLength: 100,
+          error: "slug must be between 1 and 100 characters",
+        }),
       }),
-    }),
-  })
+    },
+  )
   .get(
     "/feedback",
     async ({ query: { slug } }) => {
@@ -118,5 +124,5 @@ export const adminController = new Elysia({
           error: "slug must be between 1 and 100 characters",
         }),
       }),
-    }
+    },
   );
