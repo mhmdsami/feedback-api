@@ -1,4 +1,4 @@
-name: Lint and Test
+name: CI
 
 on:
   push:
@@ -14,8 +14,8 @@ env:
   API_KEY: s3cr3t
 
 jobs:
-  test:
-    name: Test
+  check_formatting_test:
+    name: Check formatting and Test
     runs-on: ubuntu-latest
     services:
       postgres:
