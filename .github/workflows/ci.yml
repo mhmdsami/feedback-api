@@ -1,4 +1,4 @@
-name: ci
+name: Lint and Test
 
 on:
   push:
@@ -36,6 +36,9 @@ jobs:
 
       - name: Install dependencies
         run: bun install
+
+      - name: Check formatting
+        run: bun format:check
 
       - name: Setup database
         run: bun db:migrate
