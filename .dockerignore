@@ -1,0 +1,9 @@
+/node_modules
+/tests
+.env.*
+
+/.github
+/.git
+.gitignore
+
+.prettierignore
