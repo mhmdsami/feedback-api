@@ -9,9 +9,9 @@ on:
       - main
 
 env:
-  DATABASE_URL: postgres://postgres:postgres@localhost:5432/feedbackapi
-  PORT: 3000
-  API_KEY: s3cr3t
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  PORT: ${{ secrets.PORT }}
+  API_KEY: ${{ secrets.API_KEY }}
 
 jobs:
   check_formatting_test:
