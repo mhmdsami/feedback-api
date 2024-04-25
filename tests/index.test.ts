@@ -8,7 +8,7 @@ describe("API", () => {
 
     const body = await response.json();
     expect(body).toEqual({
-      message: "Welcome to the Feedback API!",
+      message: "Welcome to the Feedback AP!",
     });
   });
 
